@@ -158,40 +158,40 @@ document.addEventListener('DOMContentLoaded', () => {
         tetrominoX = 3;
         tetrominoY = 0;
         if (collide()) {
-            alert('Game Over
-!');
-createGrid();
-score = 0;
-level = 1;
-dropInterval = 1000;
-document.getElementById('score').innerText = Score: ${score};
-document.getElementById('level').innerText = Level: ${level};
-}
-}
-    function update(time = 0) {
-    const deltaTime = time - lastTime;
-    lastTime = time;
-    dropCounter += deltaTime;
-    if (dropCounter > dropInterval) {
-        tetrominoY++;
-        if (collide()) {
-            tetrominoY--;
-            mergeTetromino();
-            checkLines();
-            resetTetromino();
+            alert('Game Over!');
+            createGrid();
+            score = 0;
+            level = 1;
+            dropInterval = 1000;
+            document.getElementById('score').innerText = `Score: ${score}`;
+            document.getElementById('level').innerText = `Level: ${level}`;
         }
-        dropCounter = 0;
     }
-    drawTetromino();
-    requestAnimationFrame(update);
-}
 
-function init() {
-    document.addEventListener('keydown', handleKey);
-    createGrid();
-    resetTetromino();
-    update();
-}
+    function update(time = 0) {
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        dropCounter += deltaTime;
+        if (dropCounter > dropInterval) {
+            tetrominoY++;
+            if (collide()) {
+                tetrominoY--;
+                mergeTetromino();
+                checkLines();
+                resetTetromino();
+            }
+            dropCounter = 0;
+        }
+        drawTetromino();
+        requestAnimationFrame(update);
+    }
 
-init();
+    function init() {
+        document.addEventListener('keydown', handleKey);
+        createGrid();
+        resetTetromino();
+        update();
+    }
+
+    init();
 });
